@@ -101,6 +101,11 @@ export function parseSolutionPath(filePath) {
   };
 }
 
+/** 제출 및 현황 집계 대상으로 인정하는 풀이 파일인지 확인한다. */
+export function isSolutionFile(filePath) {
+  return /\.(java|py)$/.test(filePath);
+}
+
 /** .github/study-members.yml 의 members 목록. 없으면 레포 콜라보레이터로 대체. */
 export async function getMembers({ github, context, workspace = process.cwd() }) {
   const file = path.join(workspace, '.github', 'study-members.yml');

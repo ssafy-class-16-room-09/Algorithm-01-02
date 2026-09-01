@@ -68,6 +68,29 @@ test('풀이 파일이 없는 PR은 체크리스트를 건드리지 않는다', 
   assert.equal(childA.state, 'open');
 });
 
+test('Python 풀이도 제출로 집계한다', async () => {
+  const { dirA, metaA } = await registerTwoProblems();
+
+  for (const [author, prNumber] of [['alice', 1], ['bob', 2]]) {
+    writeSolution(`${dirA}/${author}/Solution.py`);
+    github._state.prFiles = [{ filename: `${dirA}/${author}/Solution.py`, status: 'added' }];
+    await mergedRun({ github, context: prContext(OWNER, REPO, prNumber, author), core: makeCore() });
+  }
+
+  const childA = github._state.issues.get(metaA.issue);
+  assert.equal(childA.state, 'closed');
+});
+
+test('지원하지 않는 파일은 제출로 집계하지 않는다', async () => {
+  const { dirA, metaA } = await registerTwoProblems();
+  github._state.prFiles = [{ filename: `${dirA}/alice/notes.md`, status: 'added' }];
+  await mergedRun({ github, context: prContext(OWNER, REPO, 1, 'alice'), core: makeCore() });
+
+  const comments = github._state.comments.filter((c) => c.issue_number === metaA.issue);
+  const checklist = comments.find((c) => c.body.includes('제출 현황'));
+  assert.doesNotMatch(checklist.body, /- \[x\] @alice/);
+});
+
 test('한 명만 제출하면 그 문제 이슈는 열려있는다', async () => {
   const { dirA, metaA } = await registerTwoProblems();
   writeSolution(`${dirA}/alice/Solution.java`);

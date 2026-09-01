@@ -4,7 +4,7 @@
 풀이 폴더 생성부터 제출 검사·현황 집계까지 GitHub Actions가 처리합니다.
 
 - 플랫폼: SWEA, 프로그래머스
-- 언어: Java
+- 언어: Java, Python
 - 구조: 주차별 폴더
 
 ## 어떻게 돌아가나요
@@ -16,7 +16,7 @@
 (한 줄에 하나, 여러 개 가능)       swea-1859/{내아이디}/           전원 제출 시 하위 이슈 자동 닫힘
    ↓ 자동                             ↓ 자동                        ↓ 자동
 문제마다 하위 이슈 생성           경로 규칙 검사                 README 현황판 갱신
-(Sub-issues로 주차 이슈에 연결)    javac 컴파일 검사              하위 이슈 전부 닫히면
+(Sub-issues로 주차 이슈에 연결)    Java/Python 검사               하위 이슈 전부 닫히면
 문제별 폴더 + README 생성        주차/플랫폼 라벨 부여            주차 이슈도 자동 닫힘
 문제별 제출 체크리스트 댓글
 ```
@@ -48,7 +48,7 @@ git switch main && git pull
 git switch -c solve/week-01-swea-1859-내아이디
 
 mkdir -p solutions/week-01/swea-1859/내아이디
-# solutions/week-01/swea-1859/내아이디/Solution.java 작성
+# Solution.java 또는 Solution.py 작성
 
 git add . && git commit -m "solve: SWEA 1859 백만 장자 프로젝트"
 git push -u origin HEAD
@@ -73,12 +73,12 @@ solutions/
         ├── JooeonLee/
         │   └── Solution.java
         └── another-member/
-            └── Solution.java
+            └── Solution.py
 ```
 
 - 플랫폼 접두사: SWEA → `swea`, 프로그래머스 → `pgs`
-- 사람마다 폴더를 나눕니다. SWEA·프로그래머스 Java 풀이는 클래스명이 대부분 `Solution`이라
-  한 폴더에 모으면 컴파일이 깨집니다.
+- 사람마다 폴더를 나눕니다. 풀이 파일 이름은 Java는 `Solution.java`, Python은 `Solution.py`를 권장합니다.
+- Java는 컴파일하고 Python은 문법 오류가 없는지 검사합니다.
 - 폴더 이름은 **본인 GitHub 아이디**와 정확히 같아야 합니다. 다르면 PR 검사에서 막힙니다.
 
 자세한 규칙은 [CONTRIBUTING.md](CONTRIBUTING.md)를 참고하세요.

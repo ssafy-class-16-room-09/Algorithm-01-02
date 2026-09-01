@@ -1,4 +1,4 @@
-import { checklistMarker, parseSolutionPath, readProblemMeta } from './lib.mjs';
+import { checklistMarker, isSolutionFile, parseSolutionPath, readProblemMeta } from './lib.mjs';
 
 /**
  * 풀이 PR이 머지되면 해당 문제(자식 이슈)의 체크리스트에서 작성자를 체크한다.
@@ -22,7 +22,7 @@ export async function run({ github, context, core }) {
   for (const file of files) {
     if (file.status === 'removed') continue;
     const parsed = parseSolutionPath(file.filename);
-    if (parsed && parsed.author.toLowerCase() === author.toLowerCase()) {
+    if (parsed && isSolutionFile(parsed.file) && parsed.author.toLowerCase() === author.toLowerCase()) {
       problemDirs.add(parsed.problemDir);
     }
   }

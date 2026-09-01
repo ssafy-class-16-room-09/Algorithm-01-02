@@ -6,6 +6,7 @@ import { test } from 'node:test';
 import {
   checklistMarker,
   findProblemDirsByParentIssue,
+  isSolutionFile,
   parseIssueForm,
   parseProblemLine,
   parseProgrammersTitle,
@@ -89,6 +90,12 @@ test('parseSolutionPath: 규칙에 안 맞으면 null', () => {
   assert.equal(parseSolutionPath('solutions/week-1/swea-1859/JooeonLee/Solution.java'), null); // 주차가 2자리 아님
   assert.equal(parseSolutionPath('solutions/week-01/swea-1859/Solution.java'), null); // 작성자 폴더 없음
   assert.equal(parseSolutionPath('README.md'), null);
+});
+
+test('isSolutionFile: Java와 Python 풀이 파일만 인정한다', () => {
+  assert.equal(isSolutionFile('Solution.java'), true);
+  assert.equal(isSolutionFile('Solution.py'), true);
+  assert.equal(isSolutionFile('notes.md'), false);
 });
 
 test('checklistMarker: 폴더 경로별로 다른 마커를 만든다', () => {

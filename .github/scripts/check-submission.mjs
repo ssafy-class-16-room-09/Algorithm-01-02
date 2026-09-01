@@ -3,6 +3,7 @@ import path from 'node:path';
 import {
   REVIEW_MARKER,
   ensureLabels,
+  isSolutionFile,
   parseSolutionPath,
   platformLabel,
   readProblemMeta,
@@ -11,10 +12,10 @@ import {
 
 /**
  * PR에 담긴 파일들이 스터디 규칙을 지키는지 검사한다.
- *  - solutions/week-XX/{platform}-{번호}/{본인아이디}/*.java 경로인지
+ *  - solutions/week-XX/{platform}-{번호}/{본인아이디}/*.{java,py} 경로인지
  *  - 남의 폴더를 건드리지는 않았는지
- *  - .java 파일이 실제로 들어 있는지
- * 컴파일할 디렉터리 목록을 출력으로 넘겨 다음 스텝에서 javac를 돌린다.
+ *  - Java 또는 Python 풀이 파일이 실제로 들어 있는지
+ * 검사할 Java 디렉터리와 Python 파일 목록을 다음 스텝으로 넘긴다.
  */
 export async function run({ github, context, core }) {
   const workspace = process.env.GITHUB_WORKSPACE || process.cwd();
@@ -32,8 +33,10 @@ export async function run({ github, context, core }) {
   const errors = [];
   const warnings = [];
   const dirs = new Set();
+  const pythonFiles = [];
   const problems = new Map();
   let javaCount = 0;
+  let pythonCount = 0;
 
   for (const file of files) {
     const p = file.filename;
@@ -65,20 +68,26 @@ export async function run({ github, context, core }) {
       continue;
     }
 
-    if (!p.endsWith('.java')) {
-      warnings.push(`\`${p}\` — \`.java\`가 아닌 파일입니다. 메모라면 괜찮습니다.`);
+    if (!isSolutionFile(p)) {
+      warnings.push(`\`${p}\` — 지원하는 풀이 파일(\`.java\`, \`.py\`)이 아닙니다. 메모라면 괜찮습니다.`);
       continue;
     }
 
-    javaCount += 1;
-    dirs.add(parsed.dir);
+    if (p.endsWith('.java')) {
+      javaCount += 1;
+      dirs.add(parsed.dir);
+    } else {
+      pythonCount += 1;
+      pythonFiles.push(p);
+    }
+
     if (!problems.has(parsed.problemDir)) {
       problems.set(parsed.problemDir, readProblemMeta(workspace, parsed.problemDir));
     }
   }
 
-  if (javaCount === 0 && errors.length === 0) {
-    warnings.push('제출된 `.java` 파일이 없습니다. 풀이 PR이 맞는지 확인해 주세요.');
+  if (javaCount === 0 && pythonCount === 0 && errors.length === 0) {
+    warnings.push('제출된 Java 또는 Python 풀이 파일이 없습니다. 풀이 PR이 맞는지 확인해 주세요.');
   }
 
   // 라벨 정리: 이 PR이 다루는 주차 / 플랫폼 / 문제를 붙여 둔다.
@@ -120,6 +129,8 @@ export async function run({ github, context, core }) {
   core.setOutput('dirs', [...dirs].join(' '));
   core.setOutput('has_errors', errors.length > 0 ? 'true' : 'false');
   core.setOutput('java_count', String(javaCount));
+  core.setOutput('python_count', String(pythonCount));
+  core.setOutput('python_files', pythonFiles.join('\n'));
 
   // 검사 결과를 PR에 고정 댓글로 남긴다. 컴파일 결과는 다음 스텝에서 덧붙인다.
   const linked = [...problems.entries()]
@@ -135,7 +146,9 @@ export async function run({ github, context, core }) {
     warnings,
     linked,
     javaCount,
+    pythonCount,
     dirs: [...dirs],
+    pythonFiles,
     issues: [...problems.values()].filter(Boolean).map((m) => m.issue),
   };
   fs.writeFileSync(path.join(workspace, 'check-state.json'), JSON.stringify(state, null, 2));
@@ -157,25 +170,35 @@ export async function run({ github, context, core }) {
   }
 }
 
-/** javac 실행 후 최종 리포트를 남긴다. */
+/** Java 컴파일과 Python 문법 검사 후 최종 리포트를 남긴다. */
 export async function report({ github, context, core }) {
   const workspace = process.env.GITHUB_WORKSPACE || process.cwd();
   const statePath = path.join(workspace, 'check-state.json');
   if (!fs.existsSync(statePath)) return;
   const state = JSON.parse(fs.readFileSync(statePath, 'utf8'));
 
-  const compileOk = process.env.COMPILE_RESULT === 'success';
-  const compileLog = (process.env.COMPILE_LOG || '').trim();
+  const javaOk = state.javaCount === 0 || process.env.JAVA_COMPILE_RESULT === 'success';
+  const pythonOk = state.pythonCount === 0 || process.env.PYTHON_COMPILE_RESULT === 'success';
+  const compileOk = javaOk && pythonOk;
+  const javaCompileLog = (process.env.JAVA_COMPILE_LOG || '').trim();
+  const pythonCompileLog = (process.env.PYTHON_COMPILE_LOG || '').trim();
+  const validationLines = [
+    state.javaCount > 0 ? `- Java 컴파일: ${javaOk ? '✅ 통과' : '❌ 실패'}` : '',
+    state.pythonCount > 0 ? `- Python 문법 검사: ${pythonOk ? '✅ 통과' : '❌ 실패'}` : '',
+  ].filter(Boolean);
 
   const body = [
-    compileOk ? '## ✅ 제출 검사 통과' : '## ❌ 컴파일 실패',
+    compileOk ? '## ✅ 제출 검사 통과' : '## ❌ 풀이 검사 실패',
     '',
-    `- 경로 규칙: ✅ 통과 (\`.java\` ${state.javaCount}개)`,
-    `- 컴파일: ${compileOk ? '✅ 통과' : '❌ 실패'}`,
+    `- 경로 규칙: ✅ 통과 (Java ${state.javaCount}개, Python ${state.pythonCount}개)`,
+    ...validationLines,
     '',
     state.linked ? `### 연결된 문제\n\n${state.linked}` : '',
-    !compileOk && compileLog
-      ? `\n<details open><summary>javac 출력</summary>\n\n\`\`\`\n${compileLog.slice(0, 8000)}\n\`\`\`\n\n</details>`
+    !javaOk && javaCompileLog
+      ? `\n<details open><summary>javac 출력</summary>\n\n\`\`\`\n${javaCompileLog.slice(0, 8000)}\n\`\`\`\n\n</details>`
+      : '',
+    !pythonOk && pythonCompileLog
+      ? `\n<details open><summary>Python 문법 검사 출력</summary>\n\n\`\`\`\n${pythonCompileLog.slice(0, 8000)}\n\`\`\`\n\n</details>`
       : '',
     state.warnings.length
       ? `\n<details><summary>참고 사항 ${state.warnings.length}건</summary>\n\n${state.warnings.map((w) => `- ${w}`).join('\n')}\n\n</details>`
@@ -194,5 +217,5 @@ export async function report({ github, context, core }) {
     body,
   });
 
-  if (!compileOk) core.setFailed('javac 컴파일 실패');
+  if (!compileOk) core.setFailed('풀이 검사 실패');
 }
