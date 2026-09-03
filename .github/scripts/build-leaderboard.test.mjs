@@ -20,6 +20,8 @@ beforeEach(() => {
   );
   fs.mkdirSync(path.join(dir, 'alice'), { recursive: true });
   fs.writeFileSync(path.join(dir, 'alice', 'Solution.java'), 'class Solution {}');
+  fs.mkdirSync(path.join(dir, 'bob'), { recursive: true });
+  fs.writeFileSync(path.join(dir, 'bob', 'Solution.py'), 'class Solution:\n    pass\n');
   fs.writeFileSync(path.join(workspace, 'README.md'), '# test\n');
 });
 
@@ -48,4 +50,18 @@ test('GITHUB_REPOSITORY가 없으면(로컬 실행) "#N" 텍스트로만 표시�
   assert.equal(result.status, 0, result.stderr);
   const readme = fs.readFileSync(path.join(workspace, 'README.md'), 'utf8');
   assert.match(readme, /\|\s*#17\s*\|/);
+});
+
+test('Java 풀이만 있는 작성자를 제출자로 집계한다', () => {
+  fs.rmSync(path.join(workspace, 'solutions/week-01/pgs-111/bob'), { recursive: true, force: true });
+  const readme = runBuild({ GITHUB_REPOSITORY: 'owner/repo' });
+  assert.match(readme, /@alice/);
+  assert.doesNotMatch(readme, /@bob/);
+});
+
+test('Python 풀이만 있는 작성자도 제출자로 집계한다', () => {
+  fs.rmSync(path.join(workspace, 'solutions/week-01/pgs-111/alice'), { recursive: true, force: true });
+  const readme = runBuild({ GITHUB_REPOSITORY: 'owner/repo' });
+  assert.match(readme, /@bob/);
+  assert.doesNotMatch(readme, /@alice/);
 });

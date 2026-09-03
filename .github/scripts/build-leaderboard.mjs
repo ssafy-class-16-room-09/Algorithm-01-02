@@ -49,7 +49,7 @@ for (const week of listDirs(SOLUTIONS)) {
     const authors = listDirs(problemDir).filter((author) =>
       fs
         .readdirSync(path.join(problemDir, author))
-        .some((f) => f.endsWith('.java')),
+        .some((f) => /\.(java|py)$/.test(f)),
     );
 
     for (const author of authors) {
