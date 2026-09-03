@@ -92,22 +92,33 @@ solutions/
 
 <!-- algo-study:board:start -->
 
-> 마지막 갱신: 2026-09-02 · 등록된 문제 2개
+> 마지막 갱신: 2026-09-03 · 등록된 문제 4개
 
 ### 🏆 제출 순위
 
 | 순위 | 스터디원 | 푼 문제 | 진행률 |
 | --- | --- | --- | --- |
-| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 2 / 2 | 100% |
+| 🥇 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 4 | 50% |
+| 🥈 | [@codeforchoi](https://github.com/codeforchoi) | 2 / 4 | 50% |
 
 ### 📚 주차별 문제
 
 <details open>
+<summary><b>week-05</b> (2문제)</summary>
+
+| 문제 | 이슈 | 제출 | 제출자 |
+| --- | --- | --- | --- |
+| [LeetCode 46 · Permutations](https://leetcode.com/problems/permutations/description/) | [#14](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/14) | 0 | - |
+| [LeetCode 77 · Combinations](https://leetcode.com/problems/combinations/description/) | [#15](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/15) | 0 | - |
+
+</details>
+
+<details>
 <summary><b>week-04</b> (1문제)</summary>
 
 | 문제 | 이슈 | 제출 | 제출자 |
 | --- | --- | --- | --- |
-| [프로그래머스 43163 · 단어 변환](https://school.programmers.co.kr/learn/courses/30/lessons/43163) | [#6](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/6) | 1 | [@codeforchoi](https://github.com/codeforchoi) |
+| [프로그래머스 43163 · 단어 변환](https://school.programmers.co.kr/learn/courses/30/lessons/43163) | [#6](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/6) | 2 | [@algoORgoal](https://github.com/algoORgoal), [@codeforchoi](https://github.com/codeforchoi) |
 
 </details>
 
@@ -116,7 +127,7 @@ solutions/
 
 | 문제 | 이슈 | 제출 | 제출자 |
 | --- | --- | --- | --- |
-| [프로그래머스 86971 · 전력망을 둘로 나누기](https://school.programmers.co.kr/learn/courses/30/lessons/86971) | [#9](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/9) | 1 | [@codeforchoi](https://github.com/codeforchoi) |
+| [프로그래머스 86971 · 전력망을 둘로 나누기](https://school.programmers.co.kr/learn/courses/30/lessons/86971) | [#9](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/9) | 2 | [@algoORgoal](https://github.com/algoORgoal), [@codeforchoi](https://github.com/codeforchoi) |
 
 </details>
 
