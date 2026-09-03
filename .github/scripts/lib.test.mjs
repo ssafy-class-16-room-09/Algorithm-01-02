@@ -7,6 +7,8 @@ import {
   checklistMarker,
   findProblemDirsByParentIssue,
   isSolutionFile,
+  leetcodeSlugFromUrl,
+  parseLeetCodeProblem,
   parseIssueForm,
   parseProblemLine,
   parseProgrammersTitle,
@@ -47,7 +49,22 @@ test('parseProblemLine: 뒤 필드가 생략돼도 빈 문자열로 채운다', 
 test('urlPlatformKey: 도메인으로 플랫폼을 판별한다', () => {
   assert.equal(urlPlatformKey('https://swexpertacademy.com/x'), 'swea');
   assert.equal(urlPlatformKey('https://school.programmers.co.kr/x'), 'pgs');
+  assert.equal(urlPlatformKey('https://leetcode.com/problems/two-sum/'), 'leetcode');
   assert.equal(urlPlatformKey('https://example.com/x'), null);
+});
+
+test('leetcodeSlugFromUrl: LeetCode 문제 URL에서 slug를 추출한다', () => {
+  assert.equal(leetcodeSlugFromUrl('https://leetcode.com/problems/two-sum/'), 'two-sum');
+  assert.equal(leetcodeSlugFromUrl('https://example.com/problems/two-sum/'), null);
+  assert.equal(leetcodeSlugFromUrl('https://leetcode.com/contest/'), null);
+});
+
+test('parseLeetCodeProblem: GraphQL 응답에서 번호와 제목을 추출한다', () => {
+  assert.deepEqual(
+    parseLeetCodeProblem({ data: { question: { questionFrontendId: '1', title: 'Two Sum' } } }),
+    { number: '1', title: 'Two Sum' },
+  );
+  assert.equal(parseLeetCodeProblem({ data: { question: null } }), null);
 });
 
 test('problemNumberFromUrl: 프로그래머스 링크에서만 번호를 뽑는다', () => {

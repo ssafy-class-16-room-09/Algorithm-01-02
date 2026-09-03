@@ -4,13 +4,16 @@ import {
   REGISTER_MARKER,
   checklistMarker,
   ensureLabels,
+  findProblemMetaByUrl,
   findProblemDirsByParentIssue,
   getMembers,
   parseIssueForm,
+  parseLeetCodeProblem,
   parseProblemLine,
   parseProgrammersTitle,
   platformLabel,
   problemNumberFromUrl,
+  leetcodeSlugFromUrl,
   problemPath,
   readProblemMeta,
   upsertComment,
@@ -31,6 +34,29 @@ async function fetchProgrammersTitle(url, fetchImpl) {
     });
     if (!res.ok) return null;
     return parseProgrammersTitle(await res.text());
+  } catch {
+    return null;
+  }
+}
+
+async function fetchLeetCodeProblem(url, fetchImpl) {
+  const slug = leetcodeSlugFromUrl(url);
+  if (!slug) return null;
+  try {
+    const res = await fetchImpl('https://leetcode.com/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'User-Agent': 'Mozilla/5.0 (compatible; algo-study-bot)',
+      },
+      body: JSON.stringify({
+        query: 'query questionData($titleSlug: String!) { question(titleSlug: $titleSlug) { questionFrontendId title } }',
+        variables: { titleSlug: slug },
+      }),
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!res.ok) return null;
+    return parseLeetCodeProblem(await res.json());
   } catch {
     return null;
   }
@@ -89,15 +115,30 @@ export async function run({ github, context, core, fetchImpl = fetch }) {
     if (!/^https?:\/\//.test(url)) lineErrors.push('링크가 올바른 URL이 아닙니다');
 
     const pKey = urlPlatformKey(url);
-    if (!pKey) lineErrors.push('SWEA 또는 프로그래머스 링크만 지원합니다');
+    if (!pKey) lineErrors.push('SWEA, 프로그래머스 또는 LeetCode 링크만 지원합니다');
 
     let number = rawNumber;
     if (!number) number = problemNumberFromUrl(url) || '';
-    if (!/^[A-Za-z0-9_]+$/.test(number)) {
-      lineErrors.push('번호를 입력해 주세요 (SWEA는 필수, 프로그래머스는 링크에서 자동 추출됩니다)');
-    }
 
     let title = rawTitle;
+    const existingByUrl = pKey === 'leetcode' ? findProblemMetaByUrl(workspace, url) : null;
+    if (existingByUrl) {
+      number ||= existingByUrl.number;
+      title ||= existingByUrl.title;
+    }
+
+    if (pKey === 'leetcode' && (!number || !title) && !existingByUrl) {
+      const problem = await fetchLeetCodeProblem(url, fetchImpl);
+      if (problem) {
+        number ||= problem.number;
+        title ||= problem.title;
+      }
+    }
+
+    if (!/^[A-Za-z0-9_]+$/.test(number)) {
+      lineErrors.push('번호를 입력해 주세요 (SWEA는 직접 입력, 프로그래머스는 URL, LeetCode는 API에서 자동 추출됩니다)');
+    }
+
     if (!title && weekValid && pKey && /^[A-Za-z0-9_]+$/.test(number)) {
       // 같은 부모 이슈가 이미 등록해 둔 문제라면, 네트워크를 또 타지 않고 기존 제목을 그대로 쓴다.
       const existing = readProblemMeta(workspace, problemPath(week, pKey, number));
@@ -108,8 +149,8 @@ export async function run({ github, context, core, fetchImpl = fetch }) {
     }
     if (!title) {
       lineErrors.push(
-        pKey === 'pgs'
-          ? '제목을 자동으로 가져오지 못했습니다. 직접 입력해 주세요.'
+        pKey === 'pgs' || pKey === 'leetcode'
+          ? '제목을 자동으로 가져오지 못했습니다. 링크를 확인하거나 제목을 직접 입력해 주세요.'
           : '제목을 입력해 주세요',
       );
     }
@@ -300,11 +341,11 @@ export async function run({ github, context, core, fetchImpl = fetch }) {
       '```bash',
       `git switch -c solve/${weekDir(week)}-${pKey}-${number}-$(git config user.name)`,
       `mkdir -p ${dir}/<본인-github-아이디>`,
-      `# ${dir}/<본인-github-아이디>/Solution.java 에 풀이 작성`,
+      `# ${dir}/<본인-github-아이디>/Solution.java 또는 Solution.py 에 풀이 작성`,
       '```',
       '',
       '- 폴더 이름은 **본인 GitHub 아이디**와 정확히 같아야 합니다.',
-      '- 파일은 `.java`만 올립니다. 클래스명 충돌을 막기 위해 사람마다 폴더를 분리합니다.',
+      '- 파일은 `.java` 또는 `.py`만 올립니다. 클래스명 충돌을 막기 위해 사람마다 폴더를 분리합니다.',
       '- 다른 사람 폴더는 건드리지 않습니다. (PR 검사에서 막힙니다)',
       '',
       '## 제출 현황',

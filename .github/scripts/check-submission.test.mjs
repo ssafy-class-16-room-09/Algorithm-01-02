@@ -56,3 +56,23 @@ test('Python 풀이를 검사 대상으로 분류하고 성공 결과를 보고�
   assert.match(comment.body, /Python 문법 검사: ✅ 통과/);
 });
 
+test('LeetCode Java와 Python 풀이를 모두 제출 경로로 검사한다', async () => {
+  const github = createMockGithub();
+  const context = prContext(OWNER, REPO, 1, 'alice');
+  const core = makeCore();
+  const problemDir = 'solutions/week-01/leetcode-1';
+  const javaSolution = `${problemDir}/alice/Solution.java`;
+  const pythonSolution = `${problemDir}/alice/Solution.py`;
+  github._state.prFiles = [
+    { filename: javaSolution, status: 'added' },
+    { filename: pythonSolution, status: 'added' },
+  ];
+  await github.rest.issues.create({ title: 'LeetCode 풀이 PR' });
+
+  await run({ github, context, core });
+
+  assert.equal(core._outputs.java_count, '1');
+  assert.equal(core._outputs.python_count, '1');
+  assert.equal(core._outputs.__failed, undefined);
+});
+

@@ -56,7 +56,7 @@ export async function run({ github, context, core }) {
     const parsed = parseSolutionPath(p);
     if (!parsed) {
       errors.push(
-        `\`${p}\` — 경로 규칙에 맞지 않습니다. \`solutions/week-01/swea-1859/${author}/Solution.java\` 형태여야 합니다.`,
+        `\`${p}\` — 경로 규칙에 맞지 않습니다. \`solutions/week-01/leetcode-1/${author}/Solution.java\` 형태여야 합니다.`,
       );
       continue;
     }

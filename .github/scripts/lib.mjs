@@ -27,22 +27,50 @@ export function parseIssueForm(body = '') {
 }
 
 export function platformLabel(key) {
-  return key === 'swea' ? 'SWEA' : key === 'pgs' ? '프로그래머스' : key;
+  return key === 'swea' ? 'SWEA' : key === 'pgs' ? '프로그래머스' : key === 'leetcode' ? 'LeetCode' : key;
 }
 
 /** 문제 링크 도메인으로부터 플랫폼을 추정한다. 알 수 없는 도메인이면 null. */
 export function urlPlatformKey(url = '') {
-  const v = url.toLowerCase();
-  if (v.includes('swexpertacademy.com')) return 'swea';
-  if (v.includes('programmers.co.kr')) return 'pgs';
+  let hostname;
+  try {
+    hostname = new URL(url).hostname.toLowerCase();
+  } catch {
+    return null;
+  }
+  if (hostname === 'swexpertacademy.com' || hostname.endsWith('.swexpertacademy.com')) return 'swea';
+  if (hostname === 'programmers.co.kr' || hostname.endsWith('.programmers.co.kr')) return 'pgs';
+  if (hostname === 'leetcode.com' || hostname === 'www.leetcode.com') return 'leetcode';
   return null;
 }
 
-/** 프로그래머스 링크에서는 문제 번호를 뽑아낼 수 있다. SWEA 링크는 해시라 불가능. */
+/** 프로그래머스 링크에서는 문제 번호를 뽑아낼 수 있다. SWEA/LeetCode는 URL에 번호가 없다. */
 export function problemNumberFromUrl(url = '') {
   const pgs = url.match(/lessons\/(\d+)/);
   if (pgs) return pgs[1];
   return null;
+}
+
+/** LeetCode 문제 URL의 title slug를 추출한다. */
+export function leetcodeSlugFromUrl(url = '') {
+  try {
+    const parsed = new URL(url);
+    if (urlPlatformKey(url) !== 'leetcode') return null;
+    const match = parsed.pathname.match(/^\/problems\/([A-Za-z0-9-]+)(?:\/|$)/);
+    return match ? match[1] : null;
+  } catch {
+    return null;
+  }
+}
+
+/** LeetCode GraphQL 응답에서 문제 식별자와 제목을 추출한다. */
+export function parseLeetCodeProblem(data) {
+  const question = data?.data?.question;
+  if (!question?.questionFrontendId || !question?.title) return null;
+  return {
+    number: String(question.questionFrontendId),
+    title: String(question.title).trim(),
+  };
 }
 
 /**
@@ -167,6 +195,14 @@ export function readProblemMeta(workspace, problemDirPath) {
   } catch {
     return null;
   }
+}
+
+/** 같은 URL로 이미 등록된 문제의 메타데이터를 찾는다. */
+export function findProblemMetaByUrl(workspace, url) {
+  for (const { meta } of iterateProblemMetas(workspace)) {
+    if (meta.url === url) return meta;
+  }
+  return null;
 }
 
 function* iterateProblemMetas(workspace) {

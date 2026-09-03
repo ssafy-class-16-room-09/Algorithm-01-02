@@ -159,11 +159,70 @@ test('이미 등록된 프로그래머스 문제를 제목 없이 재등록하�
 
 test('지원하지 않는 플랫폼 링크는 등록이 실패한다', async () => {
   const { data: parent } = await github.rest.issues.create({ title: '[문제]' });
-  const bad = body(1, 'https://leetcode.com/problems/two-sum | 지원안함 | 1 | | ');
+  const bad = body(1, 'https://example.com/problems/two-sum | 지원안함 | 1 | | ');
   const core = makeCore();
   await registerRun({ github, context: issueContext(OWNER, REPO, parent.number, bad), core });
   assert.ok(core._outputs.__failed);
-  assert.match(core._outputs.__failed, /SWEA 또는 프로그래머스/);
+  assert.match(core._outputs.__failed, /SWEA, 프로그래머스 또는 LeetCode/);
+});
+
+test('LeetCode 링크만 입력하면 API에서 번호와 제목을 가져와 폴더와 sub-issue를 만든다', async () => {
+  const { data: parent } = await github.rest.issues.create({ title: '[문제] LeetCode' });
+  const b = body(1, 'https://leetcode.com/problems/two-sum/');
+  const fetchCalls = [];
+  const fetchImpl = async (url, options) => {
+    fetchCalls.push({ url, options });
+    return {
+      ok: true,
+      json: async () => ({ data: { question: { questionFrontendId: '1', title: 'Two Sum' } } }),
+    };
+  };
+  const core = makeCore();
+
+  await registerRun({ github, context: issueContext(OWNER, REPO, parent.number, b), core, fetchImpl });
+
+  assert.equal(core._outputs.__failed, undefined);
+  assert.equal(fetchCalls.length, 1);
+  assert.equal(fetchCalls[0].url, 'https://leetcode.com/graphql');
+  assert.equal(JSON.parse(fetchCalls[0].options.body).variables.titleSlug, 'two-sum');
+
+  const meta = readMeta('solutions/week-01/leetcode-1');
+  assert.equal(meta.number, '1');
+  assert.equal(meta.title, 'Two Sum');
+  assert.equal(meta.platform, 'leetcode');
+  assert.deepEqual(github._state.subIssues.get(parent.number), [meta.issue]);
+});
+
+test('LeetCode API 조회에 실패하면 이슈 본문 수정 재시도를 안내한다', async () => {
+  const { data: parent } = await github.rest.issues.create({ title: '[문제] LeetCode' });
+  const core = makeCore();
+  await registerRun({
+    github,
+    context: issueContext(OWNER, REPO, parent.number, body(1, 'https://leetcode.com/problems/two-sum/')),
+    core,
+    fetchImpl: async () => ({ ok: false }),
+  });
+
+  assert.ok(core._outputs.__failed);
+  assert.match(core._outputs.__failed, /제목을 자동으로 가져오지 못했습니다/);
+});
+
+test('같은 LeetCode 링크를 재등록하면 기존 메타데이터를 사용해 API를 호출하지 않는다', async () => {
+  const { data: parent } = await github.rest.issues.create({ title: '[문제] LeetCode' });
+  const b = body(1, 'https://leetcode.com/problems/two-sum/');
+  let fetchCount = 0;
+  const fetchImpl = async () => {
+    fetchCount += 1;
+    return { ok: true, json: async () => ({ data: { question: { questionFrontendId: '1', title: 'Two Sum' } } }) };
+  };
+
+  await registerRun({ github, context: issueContext(OWNER, REPO, parent.number, b), core: makeCore(), fetchImpl });
+  const meta = readMeta('solutions/week-01/leetcode-1');
+  await registerRun({ github, context: issueContext(OWNER, REPO, parent.number, b), core: makeCore(), fetchImpl });
+
+  assert.equal(fetchCount, 1);
+  assert.equal(readMeta('solutions/week-01/leetcode-1').issue, meta.issue);
+  assert.equal((github._state.subIssues.get(parent.number) || []).length, 1);
 });
 
 test('SWEA 링크인데 번호를 안 적으면 실패한다', async () => {

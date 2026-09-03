@@ -4,6 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, test } from 'node:test';
 import { createMockGithub, issueContext, makeCore, prContext } from './mock-github.mjs';
+import { checklistMarker } from './lib.mjs';
 import { run as registerRun } from './register-problem.mjs';
 import { run as mergedRun } from './on-merged.mjs';
 
@@ -79,6 +80,29 @@ test('Python 풀이도 제출로 집계한다', async () => {
 
   const childA = github._state.issues.get(metaA.issue);
   assert.equal(childA.state, 'closed');
+});
+
+test('LeetCode Java와 Python 제출도 같은 문제 체크리스트에 반영한다', async () => {
+  const problemDir = 'solutions/week-01/leetcode-1';
+  const { data: child } = await github.rest.issues.create({ title: '[문제] LeetCode 1' });
+  fs.mkdirSync(path.join(workspace, problemDir), { recursive: true });
+  fs.writeFileSync(
+    path.join(workspace, problemDir, '.problem.json'),
+    JSON.stringify({ issue: child.number, parentIssue: null, platform: 'leetcode', number: '1', title: 'Two Sum' }),
+  );
+  await github.rest.issues.createComment({
+    issue_number: child.number,
+    body: `${checklistMarker(problemDir)}\n\n- [ ] @alice\n- [ ] @bob`,
+  });
+
+  github._state.prFiles = [{ filename: `${problemDir}/alice/Solution.java`, status: 'added' }];
+  await mergedRun({ github, context: prContext(OWNER, REPO, 1, 'alice'), core: makeCore() });
+  github._state.prFiles = [{ filename: `${problemDir}/bob/Solution.py`, status: 'added' }];
+  await mergedRun({ github, context: prContext(OWNER, REPO, 2, 'bob'), core: makeCore() });
+
+  const closedChild = github._state.issues.get(child.number);
+  assert.equal(closedChild.state, 'closed');
+  assert.equal(closedChild.state_reason, 'completed');
 });
 
 test('지원하지 않는 파일은 제출로 집계하지 않는다', async () => {
