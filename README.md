@@ -92,18 +92,27 @@ solutions/
 
 <!-- algo-study:board:start -->
 
-> 마지막 갱신: 2026-09-03 · 등록된 문제 5개
+> 마지막 갱신: 2026-09-03 · 등록된 문제 6개
 
 ### 🏆 제출 순위
 
 | 순위 | 스터디원 | 푼 문제 | 진행률 |
 | --- | --- | --- | --- |
-| 🥇 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 5 | 40% |
-| 🥈 | [@codeforchoi](https://github.com/codeforchoi) | 2 / 5 | 40% |
+| 🥇 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 6 | 33% |
+| 🥈 | [@codeforchoi](https://github.com/codeforchoi) | 2 / 6 | 33% |
 
 ### 📚 주차별 문제
 
 <details open>
+<summary><b>week-06</b> (1문제)</summary>
+
+| 문제 | 이슈 | 제출 | 제출자 |
+| --- | --- | --- | --- |
+| [프로그래머스 42895 · N으로 표현](https://school.programmers.co.kr/learn/courses/30/lessons/42895) | [#19](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/19) | 0 | - |
+
+</details>
+
+<details>
 <summary><b>week-05</b> (3문제)</summary>
 
 | 문제 | 이슈 | 제출 | 제출자 |
