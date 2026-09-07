@@ -92,13 +92,13 @@ solutions/
 
 <!-- algo-study:board:start -->
 
-> 마지막 갱신: 2026-09-04 · 등록된 문제 6개
+> 마지막 갱신: 2026-09-07 · 등록된 문제 6개
 
 ### 🏆 제출 순위
 
 | 순위 | 스터디원 | 푼 문제 | 진행률 |
 | --- | --- | --- | --- |
-| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 3 / 6 | 50% |
+| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 4 / 6 | 67% |
 | 🥈 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 6 | 33% |
 
 ### 📚 주차별 문제
@@ -117,7 +117,7 @@ solutions/
 
 | 문제 | 이슈 | 제출 | 제출자 |
 | --- | --- | --- | --- |
-| [LeetCode 46 · Permutations](https://leetcode.com/problems/permutations/description/) | [#14](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/14) | 0 | - |
+| [LeetCode 46 · Permutations](https://leetcode.com/problems/permutations/description/) | [#14](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/14) | 1 | [@codeforchoi](https://github.com/codeforchoi) |
 | [LeetCode 77 · Combinations](https://leetcode.com/problems/combinations/description/) | [#15](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/15) | 1 | [@codeforchoi](https://github.com/codeforchoi) |
 | [프로그래머스 49189 · 가장 먼 노드](https://school.programmers.co.kr/learn/courses/30/lessons/49189) | [#17](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/17) | 0 | - |
 
