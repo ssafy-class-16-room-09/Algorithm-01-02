@@ -98,7 +98,7 @@ solutions/
 
 | 순위 | 스터디원 | 푼 문제 | 진행률 |
 | --- | --- | --- | --- |
-| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 5 / 6 | 83% |
+| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 6 / 6 | 100% |
 | 🥈 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 6 | 33% |
 
 ### 📚 주차별 문제
@@ -108,7 +108,7 @@ solutions/
 
 | 문제 | 이슈 | 제출 | 제출자 |
 | --- | --- | --- | --- |
-| [프로그래머스 42895 · N으로 표현](https://school.programmers.co.kr/learn/courses/30/lessons/42895) | [#19](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/19) | 0 | - |
+| [프로그래머스 42895 · N으로 표현](https://school.programmers.co.kr/learn/courses/30/lessons/42895) | [#19](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/19) | 1 | [@codeforchoi](https://github.com/codeforchoi) |
 
 </details>
 
