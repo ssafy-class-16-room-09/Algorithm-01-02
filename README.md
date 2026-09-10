@@ -92,22 +92,23 @@ solutions/
 
 <!-- algo-study:board:start -->
 
-> 마지막 갱신: 2026-09-10 · 등록된 문제 9개
+> 마지막 갱신: 2026-09-10 · 등록된 문제 10개
 
 ### 🏆 제출 순위
 
 | 순위 | 스터디원 | 푼 문제 | 진행률 |
 | --- | --- | --- | --- |
-| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 6 / 9 | 67% |
-| 🥈 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 9 | 22% |
+| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 6 / 10 | 60% |
+| 🥈 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 10 | 20% |
 
 ### 📚 주차별 문제
 
 <details open>
-<summary><b>week-07</b> (3문제)</summary>
+<summary><b>week-07</b> (4문제)</summary>
 
 | 문제 | 이슈 | 제출 | 제출자 |
 | --- | --- | --- | --- |
+| [LeetCode 216 · Combination Sum III](https://leetcode.com/problems/combination-sum-iii/description/) | [#31](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/31) | 0 | - |
 | [LeetCode 39 · Combination Sum](https://leetcode.com/problems/combination-sum/) | [#27](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/27) | 0 | - |
 | [LeetCode 40 · Combination Sum II](https://leetcode.com/problems/combination-sum-ii/description/) | [#29](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/29) | 0 | - |
 | [프로그래머스 1844 · 게임 맵 최단거리](https://school.programmers.co.kr/learn/courses/30/lessons/1844) | [#25](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/25) | 0 | - |
