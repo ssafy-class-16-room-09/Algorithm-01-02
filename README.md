@@ -92,22 +92,23 @@ solutions/
 
 <!-- algo-study:board:start -->
 
-> 마지막 갱신: 2026-09-10 · 등록된 문제 7개
+> 마지막 갱신: 2026-09-10 · 등록된 문제 8개
 
 ### 🏆 제출 순위
 
 | 순위 | 스터디원 | 푼 문제 | 진행률 |
 | --- | --- | --- | --- |
-| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 6 / 7 | 86% |
-| 🥈 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 7 | 29% |
+| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 6 / 8 | 75% |
+| 🥈 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 8 | 25% |
 
 ### 📚 주차별 문제
 
 <details open>
-<summary><b>week-07</b> (1문제)</summary>
+<summary><b>week-07</b> (2문제)</summary>
 
 | 문제 | 이슈 | 제출 | 제출자 |
 | --- | --- | --- | --- |
+| [LeetCode 39 · Combination Sum](https://leetcode.com/problems/combination-sum/) | [#27](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/27) | 0 | - |
 | [프로그래머스 1844 · 게임 맵 최단거리](https://school.programmers.co.kr/learn/courses/30/lessons/1844) | [#25](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/25) | 0 | - |
 
 </details>
