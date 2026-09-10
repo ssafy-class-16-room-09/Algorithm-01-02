@@ -92,18 +92,27 @@ solutions/
 
 <!-- algo-study:board:start -->
 
-> 마지막 갱신: 2026-09-10 · 등록된 문제 10개
+> 마지막 갱신: 2026-09-10 · 등록된 문제 11개
 
 ### 🏆 제출 순위
 
 | 순위 | 스터디원 | 푼 문제 | 진행률 |
 | --- | --- | --- | --- |
-| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 6 / 10 | 60% |
-| 🥈 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 10 | 20% |
+| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 6 / 11 | 55% |
+| 🥈 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 11 | 18% |
 
 ### 📚 주차별 문제
 
 <details open>
+<summary><b>week-08</b> (1문제)</summary>
+
+| 문제 | 이슈 | 제출 | 제출자 |
+| --- | --- | --- | --- |
+| [프로그래머스 12978 · 배달](https://school.programmers.co.kr/learn/courses/30/lessons/12978?gad_source=1&gad_campaignid=23037984604&gbraid=0AAAAAC_c4nD7uztE9gmhbCZD_3M8KMJfj&gclid=CjwKCAjwqonVBhA4EiwA9wYJ3ZOdskP0Cyg-WxkUKB58tx8i8XYMKwt-CstTh_0VXPMWZKeueVEi9RoCXlsQAvD_BwE) | [#33](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/33) | 0 | - |
+
+</details>
+
+<details>
 <summary><b>week-07</b> (4문제)</summary>
 
 | 문제 | 이슈 | 제출 | 제출자 |

@@ -1,0 +1,12 @@
+{
+  "issue": 33,
+  "parentIssue": 32,
+  "week": 8,
+  "platform": "pgs",
+  "platformLabel": "프로그래머스",
+  "number": "12978",
+  "title": "배달",
+  "url": "https://school.programmers.co.kr/learn/courses/30/lessons/12978?gad_source=1&gad_campaignid=23037984604&gbraid=0AAAAAC_c4nD7uztE9gmhbCZD_3M8KMJfj&gclid=CjwKCAjwqonVBhA4EiwA9wYJ3ZOdskP0Cyg-WxkUKB58tx8i8XYMKwt-CstTh_0VXPMWZKeueVEi9RoCXlsQAvD_BwE",
+  "difficulty": null,
+  "deadline": null
+}
