@@ -92,13 +92,13 @@ solutions/
 
 <!-- algo-study:board:start -->
 
-> 마지막 갱신: 2026-09-11 · 등록된 문제 11개
+> 마지막 갱신: 2026-09-16 · 등록된 문제 11개
 
 ### 🏆 제출 순위
 
 | 순위 | 스터디원 | 푼 문제 | 진행률 |
 | --- | --- | --- | --- |
-| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 8 / 11 | 73% |
+| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 9 / 11 | 82% |
 | 🥈 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 11 | 18% |
 
 ### 📚 주차별 문제
@@ -108,7 +108,7 @@ solutions/
 
 | 문제 | 이슈 | 제출 | 제출자 |
 | --- | --- | --- | --- |
-| [프로그래머스 12978 · 배달](https://school.programmers.co.kr/learn/courses/30/lessons/12978?gad_source=1&gad_campaignid=23037984604&gbraid=0AAAAAC_c4nD7uztE9gmhbCZD_3M8KMJfj&gclid=CjwKCAjwqonVBhA4EiwA9wYJ3ZOdskP0Cyg-WxkUKB58tx8i8XYMKwt-CstTh_0VXPMWZKeueVEi9RoCXlsQAvD_BwE) | [#33](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/33) | 0 | - |
+| [프로그래머스 12978 · 배달](https://school.programmers.co.kr/learn/courses/30/lessons/12978?gad_source=1&gad_campaignid=23037984604&gbraid=0AAAAAC_c4nD7uztE9gmhbCZD_3M8KMJfj&gclid=CjwKCAjwqonVBhA4EiwA9wYJ3ZOdskP0Cyg-WxkUKB58tx8i8XYMKwt-CstTh_0VXPMWZKeueVEi9RoCXlsQAvD_BwE) | [#33](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/33) | 1 | [@codeforchoi](https://github.com/codeforchoi) |
 
 </details>
 
