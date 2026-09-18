@@ -98,7 +98,7 @@ solutions/
 
 | 순위 | 스터디원 | 푼 문제 | 진행률 |
 | --- | --- | --- | --- |
-| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 17 / 21 | 81% |
+| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 18 / 21 | 86% |
 | 🥈 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 21 | 10% |
 
 ### 📚 주차별 문제
@@ -161,7 +161,7 @@ solutions/
 
 | 문제 | 이슈 | 제출 | 제출자 |
 | --- | --- | --- | --- |
-| [프로그래머스 84512 · 모음사전](https://school.programmers.co.kr/learn/courses/30/lessons/84512) | [#52](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/52) | 0 | - |
+| [프로그래머스 84512 · 모음사전](https://school.programmers.co.kr/learn/courses/30/lessons/84512) | [#52](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/52) | 1 | [@codeforchoi](https://github.com/codeforchoi) |
 | [프로그래머스 86971 · 전력망을 둘로 나누기](https://school.programmers.co.kr/learn/courses/30/lessons/86971) | [#9](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/9) | 2 | [@algoORgoal](https://github.com/algoORgoal), [@codeforchoi](https://github.com/codeforchoi) |
 
 </details>
