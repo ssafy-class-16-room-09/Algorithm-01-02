@@ -98,7 +98,7 @@ solutions/
 
 | 순위 | 스터디원 | 푼 문제 | 진행률 |
 | --- | --- | --- | --- |
-| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 11 / 21 | 52% |
+| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 12 / 21 | 57% |
 | 🥈 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 21 | 10% |
 
 ### 📚 주차별 문제
@@ -182,7 +182,7 @@ solutions/
 
 | 문제 | 이슈 | 제출 | 제출자 |
 | --- | --- | --- | --- |
-| [프로그래머스 42584 · 주식가격](https://school.programmers.co.kr/learn/courses/30/lessons/42584) | [#44](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/44) | 0 | - |
+| [프로그래머스 42584 · 주식가격](https://school.programmers.co.kr/learn/courses/30/lessons/42584) | [#44](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/44) | 1 | [@codeforchoi](https://github.com/codeforchoi) |
 | [프로그래머스 42861 · 섬 연결하기](https://school.programmers.co.kr/learn/courses/30/lessons/42861) | [#46](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/46) | 0 | - |
 | [프로그래머스 43162 · 네트워크](https://school.programmers.co.kr/learn/courses/30/lessons/43162) | [#45](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/45) | 0 | - |
 
