@@ -92,14 +92,14 @@ solutions/
 
 <!-- algo-study:board:start -->
 
-> 마지막 갱신: 2026-09-17 · 등록된 문제 14개
+> 마지막 갱신: 2026-09-18 · 등록된 문제 17개
 
 ### 🏆 제출 순위
 
 | 순위 | 스터디원 | 푼 문제 | 진행률 |
 | --- | --- | --- | --- |
-| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 11 / 14 | 79% |
-| 🥈 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 14 | 14% |
+| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 11 / 17 | 65% |
+| 🥈 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 17 | 12% |
 
 ### 📚 주차별 문제
 
@@ -162,6 +162,17 @@ solutions/
 | 문제 | 이슈 | 제출 | 제출자 |
 | --- | --- | --- | --- |
 | [프로그래머스 86971 · 전력망을 둘로 나누기](https://school.programmers.co.kr/learn/courses/30/lessons/86971) | [#9](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/9) | 2 | [@algoORgoal](https://github.com/algoORgoal), [@codeforchoi](https://github.com/codeforchoi) |
+
+</details>
+
+<details>
+<summary><b>week-01</b> (3문제)</summary>
+
+| 문제 | 이슈 | 제출 | 제출자 |
+| --- | --- | --- | --- |
+| [프로그래머스 42584 · 주식가격](https://school.programmers.co.kr/learn/courses/30/lessons/42584) | [#44](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/44) | 0 | - |
+| [프로그래머스 42861 · 섬 연결하기](https://school.programmers.co.kr/learn/courses/30/lessons/42861) | [#46](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/46) | 0 | - |
+| [프로그래머스 43162 · 네트워크](https://school.programmers.co.kr/learn/courses/30/lessons/43162) | [#45](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/45) | 0 | - |
 
 </details>
 
