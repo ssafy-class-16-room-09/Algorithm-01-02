@@ -98,7 +98,7 @@ solutions/
 
 | 순위 | 스터디원 | 푼 문제 | 진행률 |
 | --- | --- | --- | --- |
-| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 22 / 25 | 88% |
+| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 23 / 25 | 92% |
 | 🥈 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 25 | 8% |
 
 ### 📚 주차별 문제
@@ -109,7 +109,7 @@ solutions/
 | 문제 | 이슈 | 제출 | 제출자 |
 | --- | --- | --- | --- |
 | [프로그래머스 132266 · 부대복귀](https://school.programmers.co.kr/learn/courses/30/lessons/132266) | [#66](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/66) | 1 | [@codeforchoi](https://github.com/codeforchoi) |
-| [프로그래머스 62050 · 지형 이동](https://school.programmers.co.kr/learn/courses/30/lessons/62050) | [#67](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/67) | 0 | - |
+| [프로그래머스 62050 · 지형 이동](https://school.programmers.co.kr/learn/courses/30/lessons/62050) | [#67](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/67) | 1 | [@codeforchoi](https://github.com/codeforchoi) |
 | [프로그래머스 72413 · 합승 택시 요금](https://school.programmers.co.kr/learn/courses/30/lessons/72413) | [#68](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/68) | 0 | - |
 
 </details>
