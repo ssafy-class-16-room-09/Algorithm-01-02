@@ -92,18 +92,30 @@ solutions/
 
 <!-- algo-study:board:start -->
 
-> 마지막 갱신: 2026-10-13 · 등록된 문제 25개
+> 마지막 갱신: 2026-10-18 · 등록된 문제 29개
 
 ### 🏆 제출 순위
 
 | 순위 | 스터디원 | 푼 문제 | 진행률 |
 | --- | --- | --- | --- |
-| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 23 / 25 | 92% |
-| 🥈 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 25 | 8% |
+| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 23 / 29 | 79% |
+| 🥈 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 29 | 7% |
 
 ### 📚 주차별 문제
 
 <details open>
+<summary><b>week-11</b> (4문제)</summary>
+
+| 문제 | 이슈 | 제출 | 제출자 |
+| --- | --- | --- | --- |
+| [프로그래머스 12981 · 영어 끝말잇기](https://school.programmers.co.kr/learn/courses/30/lessons/12981) | [#73](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/73) | 0 | - |
+| [프로그래머스 42577 · 전화번호 목록](https://school.programmers.co.kr/learn/courses/30/lessons/42577) | [#72](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/72) | 0 | - |
+| [프로그래머스 42885 · 구명보트](https://school.programmers.co.kr/learn/courses/30/lessons/42885) | [#74](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/74) | 0 | - |
+| [프로그래머스 64064 · 불량 사용자](https://school.programmers.co.kr/learn/courses/30/lessons/64064) | [#75](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/75) | 0 | - |
+
+</details>
+
+<details>
 <summary><b>week-10</b> (3문제)</summary>
 
 | 문제 | 이슈 | 제출 | 제출자 |
