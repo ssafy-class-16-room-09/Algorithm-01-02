@@ -104,14 +104,22 @@ solutions/
 ### 📚 주차별 문제
 
 <details open>
-<summary><b>week-12</b> (5문제)</summary>
+<summary><b>week-13</b> (1문제)</summary>
+
+| 문제 | 이슈 | 제출 | 제출자 |
+| --- | --- | --- | --- |
+| [프로그래머스 12905 · 가장 큰 정사각형 찾기](https://school.programmers.co.kr/learn/courses/30/lessons/12905) | [#87](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/87) | 0 | - |
+
+</details>
+
+<details>
+<summary><b>week-12</b> (4문제)</summary>
 
 | 문제 | 이슈 | 제출 | 제출자 |
 | --- | --- | --- | --- |
 | [LeetCode 847 · Shortest Path Visiting All Nodes](https://leetcode.com/problems/shortest-path-visiting-all-nodes/description/) | [#79](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/79) | 0 | - |
 | [프로그래머스 12900 · 2 x n 타일링](https://school.programmers.co.kr/learn/courses/30/lessons/12900) | [#77](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/77) | 0 | - |
 | [프로그래머스 12902 · 3 x n 타일링](https://school.programmers.co.kr/learn/courses/30/lessons/12902) | [#84](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/84) | 0 | - |
-| [프로그래머스 12905 · 가장 큰 정사각형 찾기](https://school.programmers.co.kr/learn/courses/30/lessons/12905) | [#86](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/86) | 0 | - |
 | [프로그래머스 468373 · 바이러스 파이프](https://school.programmers.co.kr/learn/courses/30/lessons/468373) | [#78](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/78) | 0 | - |
 
 </details>

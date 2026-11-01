@@ -1,15 +1,15 @@
 # 프로그래머스 12905 · 가장 큰 정사각형 찾기
 
 - 문제 링크: https://school.programmers.co.kr/learn/courses/30/lessons/12905
-- 주차: week-12
-- 논의 이슈: [#86](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/86) (상위 이슈: [#85](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/85))
+- 주차: week-13
+- 논의 이슈: [#87](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/87) (상위 이슈: [#85](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/85))
 
 ## 제출 방법
 
 ```bash
-git switch -c solve/week-12-pgs-12905-$(git config user.name)
-mkdir -p solutions/week-12/pgs-12905/<본인-github-아이디>
-# solutions/week-12/pgs-12905/<본인-github-아이디>/Solution.java 또는 Solution.py 에 풀이 작성
+git switch -c solve/week-13-pgs-12905-$(git config user.name)
+mkdir -p solutions/week-13/pgs-12905/<본인-github-아이디>
+# solutions/week-13/pgs-12905/<본인-github-아이디>/Solution.java 또는 Solution.py 에 풀이 작성
 ```
 
 - 폴더 이름은 **본인 GitHub 아이디**와 정확히 같아야 합니다.
