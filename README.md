@@ -98,7 +98,7 @@ solutions/
 
 | 순위 | 스터디원 | 푼 문제 | 진행률 |
 | --- | --- | --- | --- |
-| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 27 / 34 | 79% |
+| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 28 / 34 | 82% |
 | 🥈 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 34 | 6% |
 
 ### 📚 주차별 문제
@@ -119,7 +119,7 @@ solutions/
 | --- | --- | --- | --- |
 | [LeetCode 847 · Shortest Path Visiting All Nodes](https://leetcode.com/problems/shortest-path-visiting-all-nodes/description/) | [#79](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/79) | 0 | - |
 | [프로그래머스 12900 · 2 x n 타일링](https://school.programmers.co.kr/learn/courses/30/lessons/12900) | [#77](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/77) | 1 | [@codeforchoi](https://github.com/codeforchoi) |
-| [프로그래머스 12902 · 3 x n 타일링](https://school.programmers.co.kr/learn/courses/30/lessons/12902) | [#84](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/84) | 0 | - |
+| [프로그래머스 12902 · 3 x n 타일링](https://school.programmers.co.kr/learn/courses/30/lessons/12902) | [#84](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/84) | 1 | [@codeforchoi](https://github.com/codeforchoi) |
 | [프로그래머스 468373 · 바이러스 파이프](https://school.programmers.co.kr/learn/courses/30/lessons/468373) | [#78](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/78) | 0 | - |
 
 </details>
