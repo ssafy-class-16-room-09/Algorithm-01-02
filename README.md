@@ -98,7 +98,7 @@ solutions/
 
 | 순위 | 스터디원 | 푼 문제 | 진행률 |
 | --- | --- | --- | --- |
-| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 28 / 34 | 82% |
+| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 29 / 34 | 85% |
 | 🥈 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 34 | 6% |
 
 ### 📚 주차별 문제
@@ -108,7 +108,7 @@ solutions/
 
 | 문제 | 이슈 | 제출 | 제출자 |
 | --- | --- | --- | --- |
-| [프로그래머스 12905 · 가장 큰 정사각형 찾기](https://school.programmers.co.kr/learn/courses/30/lessons/12905) | [#87](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/87) | 0 | - |
+| [프로그래머스 12905 · 가장 큰 정사각형 찾기](https://school.programmers.co.kr/learn/courses/30/lessons/12905) | [#87](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/87) | 1 | [@codeforchoi](https://github.com/codeforchoi) |
 
 </details>
 
