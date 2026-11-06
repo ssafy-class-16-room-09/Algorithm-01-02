@@ -90,12 +90,41 @@ jobs:
           cat python-compile.log
           exit $status
 
+      - uses: actions/setup-node@v4
+        if: steps.rules.outputs.javascript_count != '0'
+        with:
+          node-version: '24'
+
+      - name: JavaScript 문법 검사
+        id: javascript_compile
+        if: steps.rules.outputs.javascript_count != '0'
+        continue-on-error: true
+        env:
+          JAVASCRIPT_FILES: ${{ steps.rules.outputs.javascript_files }}
+        run: |
+          set +e
+          set -uo pipefail
+          status=0
+          : > javascript-compile.log
+          while IFS= read -r file; do
+            if [ -z "$file" ]; then
+              continue
+            fi
+            echo "==> node --check $file" >> javascript-compile.log
+            if ! node --check "$file" >>javascript-compile.log 2>&1; then
+              status=1
+            fi
+          done <<< "$JAVASCRIPT_FILES"
+          cat javascript-compile.log
+          exit $status
+
       - name: 결과 댓글
         if: always() && steps.rules.outcome == 'success'
         uses: actions/github-script@v7
         env:
           JAVA_COMPILE_RESULT: ${{ steps.java_compile.outcome }}
           PYTHON_COMPILE_RESULT: ${{ steps.python_compile.outcome }}
+          JAVASCRIPT_COMPILE_RESULT: ${{ steps.javascript_compile.outcome }}
         with:
           script: |
             const fs = require('fs');
@@ -104,6 +133,9 @@ jobs:
               : '';
             process.env.PYTHON_COMPILE_LOG = fs.existsSync('python-compile.log')
               ? fs.readFileSync('python-compile.log', 'utf8')
+              : '';
+            process.env.JAVASCRIPT_COMPILE_LOG = fs.existsSync('javascript-compile.log')
+              ? fs.readFileSync('javascript-compile.log', 'utf8')
               : '';
             const mod = await import(`file://${process.env.GITHUB_WORKSPACE}/.github/scripts/check-submission.mjs`);
             await mod.report({ github, context, core });

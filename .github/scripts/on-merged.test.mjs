@@ -82,6 +82,25 @@ test('Python 풀이도 제출로 집계한다', async () => {
   assert.equal(childA.state, 'closed');
 });
 
+test('JavaScript 제출을 체크하고 다른 언어로 전원 제출하면 문제 이슈를 닫는다', async () => {
+  const { dirA, metaA } = await registerTwoProblems();
+  const solution = `${dirA}/alice/Solution.js`;
+  github._state.prFiles = [
+    { filename: solution, status: 'added' },
+    { filename: `${dirA}/alice/Solution.py`, status: 'added' },
+  ];
+  await mergedRun({ github, context: prContext(OWNER, REPO, 1, 'alice'), core: makeCore() });
+
+  const checklist = github._state.comments.find((c) => c.body.includes(checklistMarker(dirA)));
+  assert.equal((checklist.body.match(/- \[x\] @alice/g) || []).length, 1);
+  assert.match(checklist.body, /- \[ \] @bob/);
+  assert.equal(github._state.issues.get(metaA.issue).state, 'open');
+
+  github._state.prFiles = [{ filename: `${dirA}/bob/Solution.java`, status: 'added' }];
+  await mergedRun({ github, context: prContext(OWNER, REPO, 2, 'bob'), core: makeCore() });
+  assert.equal(github._state.issues.get(metaA.issue).state, 'closed');
+});
+
 test('LeetCode Java와 Python 제출도 같은 문제 체크리스트에 반영한다', async () => {
   const problemDir = 'solutions/week-01/leetcode-1';
   const { data: child } = await github.rest.issues.create({ title: '[문제] LeetCode 1' });

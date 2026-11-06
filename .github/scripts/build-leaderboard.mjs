@@ -5,6 +5,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { isSolutionFile } from './lib.mjs';
 
 const ROOT = process.env.GITHUB_WORKSPACE || process.cwd();
 const SOLUTIONS = path.join(ROOT, 'solutions');
@@ -49,7 +50,7 @@ for (const week of listDirs(SOLUTIONS)) {
     const authors = listDirs(problemDir).filter((author) =>
       fs
         .readdirSync(path.join(problemDir, author))
-        .some((f) => /\.(java|py)$/.test(f)),
+        .some(isSolutionFile),
     );
 
     for (const author of authors) {
