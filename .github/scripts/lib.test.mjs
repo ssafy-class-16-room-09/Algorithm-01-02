@@ -109,9 +109,12 @@ test('parseSolutionPath: 규칙에 안 맞으면 null', () => {
   assert.equal(parseSolutionPath('README.md'), null);
 });
 
-test('isSolutionFile: Java와 Python 풀이 파일만 인정한다', () => {
+test('isSolutionFile: Java, Python, JavaScript 풀이 파일을 인정한다', () => {
   assert.equal(isSolutionFile('Solution.java'), true);
   assert.equal(isSolutionFile('Solution.py'), true);
+  assert.equal(isSolutionFile('Solution.js'), true);
+  assert.equal(isSolutionFile('Solution.ts'), false);
+  assert.equal(isSolutionFile('Solution.js.md'), false);
   assert.equal(isSolutionFile('notes.md'), false);
 });
 

@@ -65,3 +65,19 @@ test('Python 풀이만 있는 작성자도 제출자로 집계한다', () => {
   assert.match(readme, /@bob/);
   assert.doesNotMatch(readme, /@alice/);
 });
+
+test('JavaScript만 제출한 작성자도 집계하고 같은 문제의 여러 언어는 중복 집계하지 않는다', () => {
+  const dir = path.join(workspace, 'solutions/week-01/pgs-111');
+  fs.mkdirSync(path.join(dir, 'carol'));
+  fs.writeFileSync(path.join(dir, 'carol', 'Solution.js'), 'function solution() {}');
+  fs.writeFileSync(path.join(dir, 'alice', 'Solution.js'), 'function solution() {}');
+  fs.mkdirSync(path.join(dir, 'dave'));
+  fs.writeFileSync(path.join(dir, 'dave', 'notes.md'), '# 메모');
+
+  const readme = runBuild({ GITHUB_REPOSITORY: 'owner/repo' });
+  for (const author of ['alice', 'bob', 'carol']) {
+    assert.match(readme, new RegExp(`@${author}.*\\| 1 / 1 \\| 100%`));
+  }
+  assert.doesNotMatch(readme, /@dave/);
+  assert.match(readme, /\| 3 \|/);
+});

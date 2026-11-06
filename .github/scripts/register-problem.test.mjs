@@ -94,6 +94,8 @@ test('문제 폴더 README.md의 이슈 참조는 클릭 가능한 마크다운 
   const readme = fs.readFileSync(path.join(workspace, 'solutions/week-01/pgs-111', 'README.md'), 'utf8');
   assert.match(readme, new RegExp(`\\[#${meta.issue}\\]\\(https://github\\.com/${OWNER}/${REPO}/issues/${meta.issue}\\)`));
   assert.match(readme, new RegExp(`\\[#${parent.number}\\]\\(https://github\\.com/${OWNER}/${REPO}/issues/${parent.number}\\)`));
+  assert.match(readme, /Solution\.java, Solution\.py 또는 Solution\.js/);
+  assert.match(readme, /`\.java`, `\.py` 또는 `\.js`/);
 });
 
 test('프로그래머스 링크만 있고 제목이 없으면 페이지에서 제목을 가져온다 (파이프도 필요 없다)', async () => {

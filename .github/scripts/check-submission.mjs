@@ -12,10 +12,10 @@ import {
 
 /**
  * PR에 담긴 파일들이 스터디 규칙을 지키는지 검사한다.
- *  - solutions/week-XX/{platform}-{번호}/{본인아이디}/*.{java,py} 경로인지
+ *  - solutions/week-XX/{platform}-{번호}/{본인아이디}/*.{java,py,js} 경로인지
  *  - 남의 폴더를 건드리지는 않았는지
- *  - Java 또는 Python 풀이 파일이 실제로 들어 있는지
- * 검사할 Java 디렉터리와 Python 파일 목록을 다음 스텝으로 넘긴다.
+ *  - Java, Python 또는 JavaScript 풀이 파일이 실제로 들어 있는지
+ * 검사할 Java 디렉터리와 Python/JavaScript 파일 목록을 다음 스텝으로 넘긴다.
  */
 export async function run({ github, context, core }) {
   const workspace = process.env.GITHUB_WORKSPACE || process.cwd();
@@ -34,9 +34,11 @@ export async function run({ github, context, core }) {
   const warnings = [];
   const dirs = new Set();
   const pythonFiles = [];
+  const javascriptFiles = [];
   const problems = new Map();
   let javaCount = 0;
   let pythonCount = 0;
+  let javascriptCount = 0;
 
   for (const file of files) {
     const p = file.filename;
@@ -69,16 +71,19 @@ export async function run({ github, context, core }) {
     }
 
     if (!isSolutionFile(p)) {
-      warnings.push(`\`${p}\` — 지원하는 풀이 파일(\`.java\`, \`.py\`)이 아닙니다. 메모라면 괜찮습니다.`);
+      warnings.push(`\`${p}\` — 지원하는 풀이 파일(\`.java\`, \`.py\`, \`.js\`)이 아닙니다. 메모라면 괜찮습니다.`);
       continue;
     }
 
     if (p.endsWith('.java')) {
       javaCount += 1;
       dirs.add(parsed.dir);
-    } else {
+    } else if (p.endsWith('.py')) {
       pythonCount += 1;
       pythonFiles.push(p);
+    } else if (p.endsWith('.js')) {
+      javascriptCount += 1;
+      javascriptFiles.push(p);
     }
 
     if (!problems.has(parsed.problemDir)) {
@@ -86,8 +91,8 @@ export async function run({ github, context, core }) {
     }
   }
 
-  if (javaCount === 0 && pythonCount === 0 && errors.length === 0) {
-    warnings.push('제출된 Java 또는 Python 풀이 파일이 없습니다. 풀이 PR이 맞는지 확인해 주세요.');
+  if (javaCount === 0 && pythonCount === 0 && javascriptCount === 0 && errors.length === 0) {
+    warnings.push('제출된 Java, Python 또는 JavaScript 풀이 파일이 없습니다. 풀이 PR이 맞는지 확인해 주세요.');
   }
 
   // 라벨 정리: 이 PR이 다루는 주차 / 플랫폼 / 문제를 붙여 둔다.
@@ -131,6 +136,8 @@ export async function run({ github, context, core }) {
   core.setOutput('java_count', String(javaCount));
   core.setOutput('python_count', String(pythonCount));
   core.setOutput('python_files', pythonFiles.join('\n'));
+  core.setOutput('javascript_count', String(javascriptCount));
+  core.setOutput('javascript_files', javascriptFiles.join('\n'));
 
   // 검사 결과를 PR에 고정 댓글로 남긴다. 컴파일 결과는 다음 스텝에서 덧붙인다.
   const linked = [...problems.entries()]
@@ -147,8 +154,10 @@ export async function run({ github, context, core }) {
     linked,
     javaCount,
     pythonCount,
+    javascriptCount,
     dirs: [...dirs],
     pythonFiles,
+    javascriptFiles,
     issues: [...problems.values()].filter(Boolean).map((m) => m.issue),
   };
   fs.writeFileSync(path.join(workspace, 'check-state.json'), JSON.stringify(state, null, 2));
@@ -170,7 +179,7 @@ export async function run({ github, context, core }) {
   }
 }
 
-/** Java 컴파일과 Python 문법 검사 후 최종 리포트를 남긴다. */
+/** Java 컴파일과 Python/JavaScript 문법 검사 후 최종 리포트를 남긴다. */
 export async function report({ github, context, core }) {
   const workspace = process.env.GITHUB_WORKSPACE || process.cwd();
   const statePath = path.join(workspace, 'check-state.json');
@@ -179,18 +188,21 @@ export async function report({ github, context, core }) {
 
   const javaOk = state.javaCount === 0 || process.env.JAVA_COMPILE_RESULT === 'success';
   const pythonOk = state.pythonCount === 0 || process.env.PYTHON_COMPILE_RESULT === 'success';
-  const compileOk = javaOk && pythonOk;
+  const javascriptOk = state.javascriptCount === 0 || process.env.JAVASCRIPT_COMPILE_RESULT === 'success';
+  const compileOk = javaOk && pythonOk && javascriptOk;
   const javaCompileLog = (process.env.JAVA_COMPILE_LOG || '').trim();
   const pythonCompileLog = (process.env.PYTHON_COMPILE_LOG || '').trim();
+  const javascriptCompileLog = (process.env.JAVASCRIPT_COMPILE_LOG || '').trim();
   const validationLines = [
     state.javaCount > 0 ? `- Java 컴파일: ${javaOk ? '✅ 통과' : '❌ 실패'}` : '',
     state.pythonCount > 0 ? `- Python 문법 검사: ${pythonOk ? '✅ 통과' : '❌ 실패'}` : '',
+    state.javascriptCount > 0 ? `- JavaScript 문법 검사: ${javascriptOk ? '✅ 통과' : '❌ 실패'}` : '',
   ].filter(Boolean);
 
   const body = [
     compileOk ? '## ✅ 제출 검사 통과' : '## ❌ 풀이 검사 실패',
     '',
-    `- 경로 규칙: ✅ 통과 (Java ${state.javaCount}개, Python ${state.pythonCount}개)`,
+    `- 경로 규칙: ✅ 통과 (Java ${state.javaCount}개, Python ${state.pythonCount}개, JavaScript ${state.javascriptCount}개)`,
     ...validationLines,
     '',
     state.linked ? `### 연결된 문제\n\n${state.linked}` : '',
@@ -199,6 +211,9 @@ export async function report({ github, context, core }) {
       : '',
     !pythonOk && pythonCompileLog
       ? `\n<details open><summary>Python 문법 검사 출력</summary>\n\n\`\`\`\n${pythonCompileLog.slice(0, 8000)}\n\`\`\`\n\n</details>`
+      : '',
+    !javascriptOk && javascriptCompileLog
+      ? `\n<details open><summary>JavaScript 문법 검사 출력</summary>\n\n\`\`\`\n${javascriptCompileLog.slice(0, 8000)}\n\`\`\`\n\n</details>`
       : '',
     state.warnings.length
       ? `\n<details><summary>참고 사항 ${state.warnings.length}건</summary>\n\n${state.warnings.map((w) => `- ${w}`).join('\n')}\n\n</details>`
