@@ -93,13 +93,13 @@ solutions/
 
 <!-- algo-study:board:start -->
 
-> 마지막 갱신: 2026-11-24 · 등록된 문제 46개
+> 마지막 갱신: 2026-11-25 · 등록된 문제 46개
 
 ### 🏆 제출 순위
 
 | 순위 | 스터디원 | 푼 문제 | 진행률 |
 | --- | --- | --- | --- |
-| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 36 / 46 | 78% |
+| 🥇 | [@codeforchoi](https://github.com/codeforchoi) | 37 / 46 | 80% |
 | 🥈 | [@algoORgoal](https://github.com/algoORgoal) | 2 / 46 | 4% |
 
 ### 📚 주차별 문제
@@ -132,7 +132,7 @@ solutions/
 | 문제 | 이슈 | 제출 | 제출자 |
 | --- | --- | --- | --- |
 | [프로그래머스 131704 · 택배상자](https://school.programmers.co.kr/learn/courses/30/lessons/131704) | [#105](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/105) | 1 | [@codeforchoi](https://github.com/codeforchoi) |
-| [프로그래머스 169199 · 리코쳇 로봇](https://school.programmers.co.kr/learn/courses/30/lessons/169199) | [#106](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/106) | 0 | - |
+| [프로그래머스 169199 · 리코쳇 로봇](https://school.programmers.co.kr/learn/courses/30/lessons/169199) | [#106](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/106) | 1 | [@codeforchoi](https://github.com/codeforchoi) |
 | [프로그래머스 178871 · 달리기 경주](https://school.programmers.co.kr/learn/courses/30/lessons/178871) | [#104](https://github.com/ssafy-class-16-room-09/Algorithm-01-02/issues/104) | 1 | [@codeforchoi](https://github.com/codeforchoi) |
 
 </details>
